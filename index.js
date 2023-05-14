@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 const {resolve} = require('path');
-const jwtMiddleware = require(resolve('./app/middleware/authJWT'))
-require('dotenv').config()
+const path = require('path');
+const jwtMiddleware = require(path.join(__dirname,'./app/middleware/authJWT'));
+require('dotenv').config();
 
 app.use(bodyParser.json());
 app.use(cors({
@@ -13,10 +14,10 @@ app.use(cors({
 }))
 
 
-require('./app/routes/auth.routes')(app);
+require(path.join(__dirname,'./app/routes/auth.routes'))(app);
 app.use(jwtMiddleware);
-require('./app/routes/tutorial.route')(app);
-require('./app/routes/user.route',jwtMiddleware)(app);
+require(path.join(__dirname,'./app/routes/tutorial.route'))(app);
+require(path.join(__dirname,'./app/routes/user.route'))(app);
 
 
 //qwerty123
@@ -33,93 +34,3 @@ db.on("error",()=>{
 app.listen(process.env.PORT,()=>{
     console.log("listening on port "+ process.env.PORT);
     })
-
-
-// const userSchema = new mongoose.Schema({
-//     title:{
-//         type:String,
-//         required: true,
-//         enum: ["miss","mrs","mr","ms"]
-//     },
-//     firstName:{
-//         type: String,
-//         required: true,
-//         maxlength:20,
-//         minlength: 4
-//     },
-//     lastName:{
-//         type: String,
-//         required: true,
-//         maxlength: 20,
-//         minlength: 4
-//     },
-//     picture:{
-//         type: String,
-//         required: true,
-//         validate:{
-//             validator:(pic)=>{
-//                 const format = pic.split('.').pop();
-//                 return format=="jpg" || format =="png" || format=='jpeg';
-//             }
-//         }
-//     }
-// })
-
-// const User = mongoose.model("User",userSchema);
-
-
-
-
-
-
-
-// app.post("/addUser",(req, res)=>{
-//     const user = new User(req.body);
-
-//     user.save()
-//     .then((user)=>{
-//         res.send(user);
-//     })
-//     .catch((error)=>{
-//         res.status(500).send(error);
-//     })
-// })
-
-// app.get("/users/id",(req, res)=>{
-//     const id = req.params.id;
-//     if(!mongoose.Types.ObjectId.isValid(id)){
-//         res.send(400).send("invalid object id ");
-//     }
-//     User.findById(mongoose.Types.ObjectId(id))
-//     .then((user)=>{
-//         if(!user){
-//             res.send(400).send("invalid id passed");
-//         }
-//         res.send(user);
-//     })
-//     .catch((error)=>{
-//         res.status(500).send(error);
-//     })
-// })
-
-// app.get("/users",(req, res)=>{
-
-//     User.find({})
-//     .then((users)=>{
-//         res.send({data:users});
-//     })
-//     .catch((error)=>{
-//         res.status(500).send(error);
-//     })
-// })
-
-// app.post("/addAllUsers",(req,res)=>{
-//  const data = req.body.allUsers;
-//  data.forEach((user)=>{
-//     console.log("inside");
-//     const {title,firstName,lastName,picture} = user;
-//     const newUser = new User({title,firstName,lastName,picture});
-//     newUser.save();
-//  })
-//  res.send("all users added");
-// })
