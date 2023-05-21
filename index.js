@@ -31,6 +31,6 @@ db.on("error",()=>{
     console.log("db error");
 })
 
-app.listen(process.env.PORT,()=>{
-    console.log("listening on port "+ process.env.PORT);
+app.listen(8000,()=>{
+    console.log("listening on port "+ 8000);
     })
