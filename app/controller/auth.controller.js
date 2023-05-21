@@ -36,7 +36,7 @@ exports.login = (req,res)=>{
         let payload = {
             id : user._id
         }
-        let token = jwt.sign(payload,process.env.SECRET_KEY,{expiresIn: 86400});
+        let token = jwt.sign(payload,"qwerty123",{expiresIn: 86400});
         res.send({
             user: user,
             message: "Login Succesful",
