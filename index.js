@@ -21,7 +21,7 @@ require(path.join(__dirname,'./app/routes/user.route'))(app);
 
 
 //qwerty123
-mongoose.connect(process.env.MONGODB_URL);
+mongoose.connect(mongodb+srv://1998shivangit:qwerty123@cluster0.8amompz.mongodb.net/?retryWrites=true&w=majority);
 //mongodb+srv://1998shivangit:qwerty123@cluster0.8amompz.mongodb.net/?retryWrites=true&w=majority
 const db = mongoose.connection;
 db.on("open",()=>{
