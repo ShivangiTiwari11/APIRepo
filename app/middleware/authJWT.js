@@ -7,7 +7,7 @@ const verifyToken = (req, res, next) => {
 
         if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] == 'JWT') {
             let token = req.headers.authorization.split(' ')[1];
-            jwt.verify(token, process.env.SECRET_KEY, function (err, payload) {
+            jwt.verify(token, "qwerty123", function (err, payload) {
                 if (err) {
                     return res.status(403).send({ message: "Access Denied, user not authenticated" });
                 }
